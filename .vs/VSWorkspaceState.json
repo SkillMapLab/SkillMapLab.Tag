@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\SkillMapLab.Tag",
+    "\\SkillMapLab.Tag\\Models"
   ],
+  "SelectedNode": "\\SkillMapLab.Tag\\SkillMapLab.Tag.csproj",
   "PreviewInSolutionExplorer": false
 }

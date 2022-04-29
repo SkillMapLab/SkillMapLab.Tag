@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\David Super PC\\Source\\Repos\\SkillMapLab\\SkillMapLab.Tag\\SkillMapLab.Tag\\SkillMapLab.Tag.csproj": {}
+    "C:\\Users\\David Super PC\\source\\repos\\SkillMapLab\\SkillMapLab.Tag\\SkillMapLab.Tag\\SkillMapLab.Tag.csproj": {}
   },
   "projects": {
-    "C:\\Users\\David Super PC\\Source\\Repos\\SkillMapLab\\SkillMapLab.Tag\\SkillMapLab.Tag\\SkillMapLab.Tag.csproj": {
+    "C:\\Users\\David Super PC\\source\\repos\\SkillMapLab\\SkillMapLab.Tag\\SkillMapLab.Tag\\SkillMapLab.Tag.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\David Super PC\\Source\\Repos\\SkillMapLab\\SkillMapLab.Tag\\SkillMapLab.Tag\\SkillMapLab.Tag.csproj",
+        "projectUniqueName": "C:\\Users\\David Super PC\\source\\repos\\SkillMapLab\\SkillMapLab.Tag\\SkillMapLab.Tag\\SkillMapLab.Tag.csproj",
         "projectName": "SkillMapLab.Tag",
-        "projectPath": "C:\\Users\\David Super PC\\Source\\Repos\\SkillMapLab\\SkillMapLab.Tag\\SkillMapLab.Tag\\SkillMapLab.Tag.csproj",
+        "projectPath": "C:\\Users\\David Super PC\\source\\repos\\SkillMapLab\\SkillMapLab.Tag\\SkillMapLab.Tag\\SkillMapLab.Tag.csproj",
         "packagesPath": "C:\\Users\\David Super PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\David Super PC\\Source\\Repos\\SkillMapLab\\SkillMapLab.Tag\\SkillMapLab.Tag\\obj\\",
+        "outputPath": "C:\\Users\\David Super PC\\source\\repos\\SkillMapLab\\SkillMapLab.Tag\\SkillMapLab.Tag\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\David Super PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
