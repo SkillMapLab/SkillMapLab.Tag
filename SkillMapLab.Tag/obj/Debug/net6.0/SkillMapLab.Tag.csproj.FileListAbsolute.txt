@@ -1,0 +1,7 @@
+C:\Users\David Super PC\source\repos\SkillMapLab\SkillMapLab.Tag\SkillMapLab.Tag\obj\Debug\net6.0\SkillMapLab.Tag.csproj.AssemblyReference.cache
+C:\Users\David Super PC\source\repos\SkillMapLab\SkillMapLab.Tag\SkillMapLab.Tag\obj\Debug\net6.0\SkillMapLab.Tag.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\David Super PC\source\repos\SkillMapLab\SkillMapLab.Tag\SkillMapLab.Tag\obj\Debug\net6.0\SkillMapLab.Tag.AssemblyInfoInputs.cache
+C:\Users\David Super PC\source\repos\SkillMapLab\SkillMapLab.Tag\SkillMapLab.Tag\obj\Debug\net6.0\SkillMapLab.Tag.AssemblyInfo.cs
+C:\Users\David Super PC\source\repos\SkillMapLab\SkillMapLab.Tag\SkillMapLab.Tag\obj\Debug\net6.0\SkillMapLab.Tag.csproj.CoreCompileInputs.cache
+C:\Users\David Super PC\source\repos\SkillMapLab\SkillMapLab.Tag\SkillMapLab.Tag\obj\Debug\net6.0\SkillMapLab.Tag.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\David Super PC\source\repos\SkillMapLab\SkillMapLab.Tag\SkillMapLab.Tag\obj\Debug\net6.0\SkillMapLab.Tag.MvcApplicationPartsAssemblyInfo.cache
