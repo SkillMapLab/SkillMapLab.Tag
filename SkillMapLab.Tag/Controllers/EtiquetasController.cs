@@ -1,60 +1,42 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-using SkillMapLab.Tag.Data;
-using SkillMapLab.Tag.Models;
+using SkillMapLab.Tags.Data;
+using SkillMapLab.Tags.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace SkillMapLab.Tag.Controllers
+namespace SkillMapLab.Tags.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EtiquetasController : ControllerBase
+    public class TagsController : ControllerBase
     {
-        private readonly IEtiquetaRepository _etiquetaRepository;
+        private readonly ITagRepository _tagRepository;
 
-        public EtiquetasController(IEtiquetaRepository etiquetaRepository)
+        public TagsController(ITagRepository tagRepository)
         {
-            _etiquetaRepository = etiquetaRepository;
+            _tagRepository = tagRepository;
         }
 
-        // GET: api/<EtiquetasController>
+        // GET: api/<TagsController>
         [HttpGet]
-        public IEnumerable<Etiqueta> Index()
+        public IEnumerable<Tag> Index()
         {
-            return _etiquetaRepository.GetAll();
+            return _tagRepository.GetAll();
         }
 
-        // GET api/<EtiquetasController>/5
+        // GET api/<TagsController>/5
         [HttpGet("{id}")]
-        public Etiqueta GetById(Guid id)
+        public Tag GetById(Guid id)
         {
-            return _etiquetaRepository.GetById(id);
+            return _tagRepository.GetById(id);
         }
 
-        // GET api/<EtiquetasController>/name
+        // GET api/<TagsController>/name
         [HttpGet("{id}")]
-        public IEnumerable<Etiqueta> GetByName(string name)
+        public IEnumerable<Tag> GetByName(string name)
         {
-            return _etiquetaRepository.GetByName(name);
-        }
-
-        // POST api/<EtiquetasController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<EtiquetasController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<EtiquetasController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return _tagRepository.GetByName(name);
         }
     }
 }

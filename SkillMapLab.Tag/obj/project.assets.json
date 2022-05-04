@@ -1227,9 +1227,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\David Super PC\\source\\repos\\SkillMapLab\\SkillMapLab.Tag\\SkillMapLab.Tag\\SkillMapLab.Tag.csproj",
-      "projectName": "SkillMapLab.Tag",
-      "projectPath": "C:\\Users\\David Super PC\\source\\repos\\SkillMapLab\\SkillMapLab.Tag\\SkillMapLab.Tag\\SkillMapLab.Tag.csproj",
+      "projectUniqueName": "C:\\Users\\David Super PC\\source\\repos\\SkillMapLab\\SkillMapLab.Tag\\SkillMapLab.Tag\\SkillMapLab.Tags.csproj",
+      "projectName": "SkillMapLab.Tags",
+      "projectPath": "C:\\Users\\David Super PC\\source\\repos\\SkillMapLab\\SkillMapLab.Tag\\SkillMapLab.Tag\\SkillMapLab.Tags.csproj",
       "packagesPath": "C:\\Users\\David Super PC\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\David Super PC\\source\\repos\\SkillMapLab\\SkillMapLab.Tag\\SkillMapLab.Tag\\obj\\",
       "projectStyle": "PackageReference",

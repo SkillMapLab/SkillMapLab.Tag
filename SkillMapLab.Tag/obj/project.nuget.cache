@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4XeT44UiAWt0SubxD69bqK/lwSxY8fVxSjefVR3Zv1QC/WgcoEZdQGrxDZaEDWbAgTRjG7TsENHxVVNxvO1trw==",
+  "dgSpecHash": "Ofi9GYI4pU4ERM/npkr0Cp4aAN0cUvljCC3Q8lSp5rdQIRbMEXXBJ/xyaNOQ9DRvHLlWgXRq7Toipx3QJGI5Eg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\David Super PC\\source\\repos\\SkillMapLab\\SkillMapLab.Tag\\SkillMapLab.Tag\\SkillMapLab.Tag.csproj",
+  "projectFilePath": "C:\\Users\\David Super PC\\source\\repos\\SkillMapLab\\SkillMapLab.Tag\\SkillMapLab.Tag\\SkillMapLab.Tags.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\David Super PC\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\David Super PC\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
