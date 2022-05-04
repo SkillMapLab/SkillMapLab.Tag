@@ -17,6 +17,30 @@ namespace SkillMapLab.Tags.Data
             };
         }
 
+        public void Create(Tag tag)
+        {
+            tag.Id = Guid.NewGuid();
+            _tags.Add(tag);
+        }
+
+        public void CreateInBulk(IEnumerable<Tag> tags)
+        {
+            foreach (var tag in tags)
+            {
+                tag.Id = Guid.NewGuid();
+                _tags.Add(tag);
+            }
+        }
+
+        public void Delete(Guid id)
+        {
+            var tagToRemove = _tags.FirstOrDefault(t => t.Id == id);
+            if (tagToRemove != null)
+            {
+                _tags.Remove(tagToRemove);
+            }
+        }
+
         public IEnumerable<Tag> GetAll()
         {
             return _tags;
@@ -24,7 +48,7 @@ namespace SkillMapLab.Tags.Data
 
         public Tag GetById(Guid id)
         {
-            var tag= _tags.FirstOrDefault(e => e.Id == id);
+            var tag = _tags.FirstOrDefault(e => e.Id == id);
             if (tag != null)
             {
                 return tag;
@@ -32,16 +56,26 @@ namespace SkillMapLab.Tags.Data
             else
             {
                 //Catch exception
-                return null;
+                return new Tag();
             }
-
         }
 
         public IEnumerable<Tag> GetByName(string name)
         {
             return from tag in _tags
-                    where tag.Name.Contains(name)
-                    select tag;
+                   where tag.Name.Contains(name)
+                   select tag;
+        }
+
+        public void Update(Tag updatedTag)
+        {
+            if (_tags.Any(t => updatedTag.Id == t.Id))
+            {
+                var tagToUpdate = _tags.First(t => updatedTag.Id == t.Id);
+                tagToUpdate.Name = updatedTag.Name;
+                tagToUpdate.Description = updatedTag.Description;
+                tagToUpdate.Status = updatedTag.Status;
+            }
         }
     }
 }
