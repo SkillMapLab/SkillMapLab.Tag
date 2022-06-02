@@ -1,9 +1,48 @@
-import { Controller, Get } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { CreateTagDto } from '../dto/create-tag.dto';
+import { TagDtoInfo } from '../dto/info-tag.dto';
+import { UpdateTagDto } from '../dto/update-tag.dto';
+import { TagsService } from '../tags.service';
 
 @Controller('tags')
 export class TagsController {
+  constructor(private tagsService: TagsService) {}
+
   @Get()
-  findAll(): string {
-    return 'This action returns all tags';
+  async findAll(): Promise<TagDtoInfo[]> {
+    return await this.tagsService.findAll();
+  }
+
+  @Get(':id')
+  async findOne(@Param('id') id: string): Promise<string> {
+    return await this.findOne(id);
+  }
+
+  @Post()
+  async create(@Body() tag: CreateTagDto): Promise<void> {
+    await this.tagsService.AddOne(tag);
+  }
+
+  @Post()
+  async createMultiple(@Body() tags: CreateTagDto[]): Promise<void> {
+    await this.tagsService.AddMultiple(tags);
+  }
+
+  @Put(':id')
+  async update(id: string, @Body() tag: UpdateTagDto): Promise<void> {
+    return await this.tagsService.update(id, tag);
+  }
+
+  @Delete(':id')
+  async delete(id: string): Promise<void> {
+    return await this.tagsService.delete(id);
   }
 }
