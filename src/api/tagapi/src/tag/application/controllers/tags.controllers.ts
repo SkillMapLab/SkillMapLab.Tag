@@ -10,11 +10,11 @@ import {
 import { CreateTagDto } from '../dto/create-tag.dto';
 import { TagDtoInfo } from '../dto/info-tag.dto';
 import { UpdateTagDto } from '../dto/update-tag.dto';
-import { TagsService } from '../tags.service';
+import { TagsService } from '../services/tags.service';
 
 @Controller('tags')
 export class TagsController {
-  constructor(private tagsService: TagsService) {}
+  constructor(private tagsService: TagsService) { }
 
   @Get()
   async findAll(): Promise<TagDtoInfo[]> {
