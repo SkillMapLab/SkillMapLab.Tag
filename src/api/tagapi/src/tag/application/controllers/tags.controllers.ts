@@ -22,8 +22,8 @@ export class TagsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<string> {
-    return await this.findOne(id);
+  async findOne(@Param('id') id: string): Promise<TagDtoInfo> {
+    return await this.tagsService.findOne(id);
   }
 
   @Post()

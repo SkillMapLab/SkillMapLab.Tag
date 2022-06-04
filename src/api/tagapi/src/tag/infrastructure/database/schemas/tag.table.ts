@@ -1,15 +1,21 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { AutoMap } from '@automapper/classes';
+import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Tag {
-  @PrimaryGeneratedColumn()
+  @AutoMap()
+  @PrimaryColumn()
   id: string;
+  @AutoMap()
   @Column()
   key: string;
+  @AutoMap()
   @Column()
   name: string;
+  @AutoMap()
   @Column()
   description: string;
-  @Column({ default: true })
+  @AutoMap()
+  @Column({ default: 1 })
   status: number;
 }

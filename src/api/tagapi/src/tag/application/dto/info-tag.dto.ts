@@ -1,5 +1,14 @@
+import { AutoMap } from "@automapper/classes";
+
 export class TagDtoInfo {
-  Id: string;
-  Name: string;
-  Status: string;
+  @AutoMap()
+  id: string;
+  @AutoMap()
+  key: string;
+  @AutoMap()
+  name: string;
+  @AutoMap()
+  description: string;
+  @AutoMap()
+  status: string;
 }

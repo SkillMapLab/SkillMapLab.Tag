@@ -3,7 +3,7 @@ export class Tag {
   Name: string;
   Description: string;
 
-  constructor(
+  private constructor(
     public key: string,
     public name: string,
     public description: string,
@@ -11,5 +11,9 @@ export class Tag {
     this.Key = key;
     this.Name = name;
     this.Description = description;
+  }
+
+  static CreateTag(key: string, name: string, description: string = ''): Tag {
+    return new Tag(key, name, description);
   }
 }

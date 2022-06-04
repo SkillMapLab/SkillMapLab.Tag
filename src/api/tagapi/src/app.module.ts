@@ -1,10 +1,19 @@
 import { TagModule } from './tag/tag.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AutomapperModule } from '@automapper/nestjs';
+import { classes } from '@automapper/classes';
 
 @Module({
   imports: [
     TagModule,
+    AutomapperModule.forRoot([
+      {
+        name: 'classes',
+        strategyInitializer: classes(),
+      },
+    ]
+    ),
     TypeOrmModule.forRootAsync({
       useFactory: () => ({
         type: 'mysql',
@@ -18,7 +27,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         retryAttempts: parseInt(process.env.DATABASE_RETRY),
         retryDelay: parseInt(process.env.DATABASE_RETRYDELAY),
       }),
-    }),
+    })
   ],
 })
 export class AppModule { }
