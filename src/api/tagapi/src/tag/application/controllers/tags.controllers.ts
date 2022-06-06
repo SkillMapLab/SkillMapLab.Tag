@@ -26,6 +26,11 @@ export class TagsController {
     return await this.tagsService.findOne(id);
   }
 
+  @Get('getbykey/:key')
+  async findByKey(@Param('key') key: string): Promise<TagDtoInfo> {
+    return await this.tagsService.findByKey(key);
+  }
+
   @Post()
   async create(@Body() tag: CreateTagDto): Promise<void> {
     await this.tagsService.AddOne(tag);

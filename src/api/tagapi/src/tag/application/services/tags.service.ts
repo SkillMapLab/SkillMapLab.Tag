@@ -1,6 +1,6 @@
 import { Mapper } from '@automapper/core';
-import { InjectMapper, MapInterceptor } from '@automapper/nestjs';
-import { Injectable, UseInterceptors } from '@nestjs/common';
+import { InjectMapper } from '@automapper/nestjs';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Tag } from 'src/tag/infrastructure/database/schemas';
 import { Repository } from 'typeorm';
@@ -23,6 +23,12 @@ export class TagsService {
 
   async findOne(id: string): Promise<TagDtoInfo> {
     const data = await this.tagRepository.findOneBy({ id });
+
+    return await this.mapper.mapAsync(data, Tag, TagDtoInfo)
+  }
+
+  async findByKey(key: string): Promise<TagDtoInfo> {
+    const data = await this.tagRepository.findOneBy({ key });
 
     return await this.mapper.mapAsync(data, Tag, TagDtoInfo)
   }
