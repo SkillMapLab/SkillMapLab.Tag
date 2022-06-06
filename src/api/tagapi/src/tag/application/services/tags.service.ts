@@ -2,7 +2,6 @@ import { Mapper } from '@automapper/core';
 import { InjectMapper, MapInterceptor } from '@automapper/nestjs';
 import { Injectable, UseInterceptors } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { TagsProfile } from 'src/tag/config';
 import { Tag } from 'src/tag/infrastructure/database/schemas';
 import { Repository } from 'typeorm';
 import { CreateTagDto } from '../dto/create-tag.dto';
@@ -19,28 +18,33 @@ export class TagsService {
   async findAll(): Promise<TagDtoInfo[]> {
     const data = await this.tagRepository.find();
 
-    return this.mapper.mapArray(data, Tag, TagDtoInfo)
+    return await this.mapper.mapArrayAsync(data, Tag, TagDtoInfo)
   }
 
   async findOne(id: string): Promise<TagDtoInfo> {
     const data = await this.tagRepository.findOneBy({ id });
 
-    return this.mapper.map(data, Tag, TagDtoInfo)
+    return await this.mapper.mapAsync(data, Tag, TagDtoInfo)
   }
 
   async AddOne(tag: CreateTagDto): Promise<void> {
-    // Do Nothing
+
+    const tagToAdd = await this.mapper.mapAsync(tag, CreateTagDto, Tag);
+
+    await this.tagRepository.insert(tagToAdd);
   }
 
   async AddMultiple(tags: CreateTagDto[]): Promise<void> {
-    // Do Nothing
+    const tagToAdd = await this.mapper.mapArrayAsync(tags, CreateTagDto, Tag);
+
+    await this.tagRepository.insert(tags);
   }
 
   async update(id: string, tag: UpdateTagDto): Promise<void> {
-    // Do Nothing
+    await this.tagRepository.update({ id }, tag)
   }
 
   async delete(id: string): Promise<void> {
-    // Do Nothing
+    await this.tagRepository.delete({ id });
   }
 }

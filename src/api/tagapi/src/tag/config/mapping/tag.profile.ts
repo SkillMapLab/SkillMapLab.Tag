@@ -2,7 +2,7 @@ import { AutomapperProfile, InjectMapper } from '@automapper/nestjs';
 import { createMap, forMember, mapFrom, Mapper, MappingConfiguration, MappingProfile, typeConverter } from '@automapper/core';
 import { Injectable } from '@nestjs/common';
 import { Tag } from 'src/tag/infrastructure/database/schemas';
-import { TagDtoInfo } from 'src/tag/application';
+import { CreateTagDto, TagDtoInfo } from 'src/tag/application';
 
 @Injectable()
 export class TagsProfile extends AutomapperProfile {
@@ -15,15 +15,20 @@ export class TagsProfile extends AutomapperProfile {
       createMap(mapper, Tag, TagDtoInfo,
         forMember(
           (d) => d.status,
-          mapFrom((s) => GetStatus(s.status))
+          mapFrom((s) => GetStatusName(s.status))
         )
+      );
+      createMap(mapper, CreateTagDto, Tag,
+        forMember((d) => d.key, mapFrom((s) => s.key)),
+        forMember((d) => d.name, mapFrom((s) => s.name)),
+        forMember((d) => d.description, mapFrom((s) => s.description)),
       );
     };
   }
 }
 
 
-const GetStatus = (value: number): string => {
+const GetStatusName = (value: number): string => {
   switch (value) {
     case 1:
       return "Active"

@@ -4,7 +4,7 @@ import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Tag {
   @AutoMap()
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn("uuid")
   id: string;
   @AutoMap()
   @Column()

@@ -31,18 +31,18 @@ export class TagsController {
     await this.tagsService.AddOne(tag);
   }
 
-  @Post()
+  @Post('multiple')
   async createMultiple(@Body() tags: CreateTagDto[]): Promise<void> {
     await this.tagsService.AddMultiple(tags);
   }
 
   @Put(':id')
-  async update(id: string, @Body() tag: UpdateTagDto): Promise<void> {
+  async update(@Param('id') id: string, @Body() tag: UpdateTagDto): Promise<void> {
     return await this.tagsService.update(id, tag);
   }
 
   @Delete(':id')
-  async delete(id: string): Promise<void> {
+  async delete(@Param('id') id: string): Promise<void> {
     return await this.tagsService.delete(id);
   }
 }
