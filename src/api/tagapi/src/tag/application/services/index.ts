@@ -1,1 +1,1 @@
-export { TagsService } from './tags.service'
+export { TagService } from './tag.service'

@@ -1,0 +1,1 @@
+export { Tag as TagDomain } from './tag.domain'

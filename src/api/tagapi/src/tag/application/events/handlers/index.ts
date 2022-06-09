@@ -1,0 +1,1 @@
+export { CreatedTagEventHandler } from './created-tag-event.handler'
