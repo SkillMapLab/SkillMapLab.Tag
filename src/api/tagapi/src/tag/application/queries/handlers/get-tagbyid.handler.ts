@@ -2,6 +2,7 @@ import { Mapper } from '@automapper/core';
 import { InjectMapper } from '@automapper/nestjs';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { InjectRepository } from '@nestjs/typeorm';
+import { TagDomain } from 'src/tag/domain';
 import { TagRepository } from 'src/tag/infrastructure/database';
 import { Tag } from 'src/tag/infrastructure/database/schemas';
 import { TagDtoInfo } from '../../dto';
@@ -16,8 +17,8 @@ export class GetTagByIdQueryHandler implements IQueryHandler<GetTagByIdQuery> {
 
   async execute(query: GetTagByIdQuery): Promise<TagDtoInfo> {
 
-    const data = await this.tagRepository.FindById(query.id);
+    const dataDomain = await this.tagRepository.GetById(query.id);
 
-    return await this.mapper.mapAsync(data, Tag, TagDtoInfo);
+    return await this.mapper.mapAsync(dataDomain, TagDomain, TagDtoInfo);
   }
 }

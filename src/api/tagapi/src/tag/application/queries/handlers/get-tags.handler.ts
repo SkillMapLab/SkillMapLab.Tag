@@ -2,8 +2,9 @@ import { Mapper } from '@automapper/core';
 import { InjectMapper } from '@automapper/nestjs';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { InjectRepository } from '@nestjs/typeorm';
-import { TagRepository } from 'src/tag/infrastructure/database';
-import { Tag } from 'src/tag/infrastructure/database/schemas';
+
+import { TagDomain } from 'src/tag/domain';
+import { Tag, TagRepository } from 'src/tag/infrastructure/database';
 import { TagDtoInfo } from '../../dto';
 import { GetTagsQuery } from '../get-tags.query';
 
@@ -11,13 +12,13 @@ import { GetTagsQuery } from '../get-tags.query';
 export class GetTagsQueryHandler implements IQueryHandler<GetTagsQuery> {
 
   constructor(
-    @InjectRepository(Tag) private tagRepository: TagRepository,
+    private tagRepository: TagRepository,
     @InjectMapper('classes') private mapper: Mapper) { }
 
   async execute(query: GetTagsQuery): Promise<TagDtoInfo[]> {
 
-    const data = await this.tagRepository.FindAll(1);
+    const dataDomain = await this.tagRepository.GetAll(query.status);
 
-    return await this.mapper.mapArrayAsync(data, Tag, TagDtoInfo);
+    return await this.mapper.mapArrayAsync(dataDomain, TagDomain, TagDtoInfo);
   }
 }

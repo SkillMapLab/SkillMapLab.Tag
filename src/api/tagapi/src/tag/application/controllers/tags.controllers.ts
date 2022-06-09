@@ -25,7 +25,7 @@ export class TagsController {
   }
 
   @Get('getbykey/:key')
-  async GetByKey(@Param('key') key: string): Promise<TagDtoInfo> {
+  async GetByKey(@Param('key') key: string): Promise<TagDtoInfo[]> {
     return await this.tagService.GetByKey(key);
   }
 

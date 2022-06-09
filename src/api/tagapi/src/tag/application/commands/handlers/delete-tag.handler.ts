@@ -12,17 +12,15 @@ import { DeleteTagCommand } from '../delete-tag.command';
 export class DeleteTagCommandHandler implements ICommandHandler<DeleteTagCommand>
 {
   constructor(
-    @InjectRepository(Tag) private tagRepository: TagRepository,
+    private tagRepository: TagRepository,
     @InjectMapper('classes') private mapper: Mapper,
     private readonly publisher: EventPublisher
   ) { }
 
   async execute(command: DeleteTagCommand): Promise<void> {
-    const tagModel = await this.tagRepository.FindById(command.id);
+    const dataDomain = await this.tagRepository.GetById(command.id);
 
-    const tagDomain = await this.mapper.mapAsync(tagModel, Tag, TagDomain);
-
-    const tagMerged = this.publisher.mergeObjectContext(tagDomain);
+    const tagMerged = this.publisher.mergeObjectContext(dataDomain);
 
     tagMerged.Delete();
 

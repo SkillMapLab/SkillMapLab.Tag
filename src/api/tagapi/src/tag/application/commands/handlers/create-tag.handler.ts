@@ -13,7 +13,7 @@ import { TagDomain } from 'src/tag/domain';
 @CommandHandler(CreateTagCommand)
 export class CreateTagCommandHandler implements ICommandHandler<CreateTagCommand> {
   constructor(
-    @InjectRepository(Tag) private tagRepository: TagRepository,
+    private tagRepository: TagRepository,
     @InjectMapper('classes') private mapper: Mapper,
     private readonly publisher: EventPublisher
   ) { }

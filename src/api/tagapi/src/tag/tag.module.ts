@@ -3,17 +3,16 @@ import { CqrsModule } from '@nestjs/cqrs';
 
 import { TagsController } from './application';
 import { TagsProfile } from './config';
-import { TagRepository } from './infrastructure/database';
+import { Tag, TagRepository } from './infrastructure/database';
 import { TagService } from './application/services';
-import { CreateTagCommandHandler, DeleteTagCommandHandler, UpdateTagCommandHandler } from './application/commands/handlers';
-import { CreatedTagEventHandler } from './application/events/handlers';
 import { TagsSagas } from './infrastructure/sagas';
-
-const CommandHandlers = [CreateTagCommandHandler, UpdateTagCommandHandler, DeleteTagCommandHandler]
-const EventHandlers = [CreatedTagEventHandler]
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { CommandHandlers } from './application/commands/handlers';
+import { EventHandlers } from './application/events/handlers';
+import { QueryHandlers } from './application/queries/handlers';
 
 @Module({
-  imports: [CqrsModule],
+  imports: [CqrsModule, TypeOrmModule.forFeature([Tag])],
   controllers: [TagsController],
   providers: [
     TagService,
@@ -21,6 +20,7 @@ const EventHandlers = [CreatedTagEventHandler]
     TagRepository,
     TagsSagas,
     ...CommandHandlers,
-    ...EventHandlers,],
+    ...EventHandlers,
+    ...QueryHandlers],
 })
 export class TagModule { }

@@ -6,6 +6,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateTagDto, TagDtoInfo, UpdateTagDto } from '../dto';
 import { GetTagByIdQuery, GetTagByKeyQuery, GetTagsQuery } from '../queries';
 import { CreateTagCommand, DeleteTagCommand, UpdateTagCommand } from '../commands';
+import { TagDomain } from 'src/tag/domain';
 
 
 @Injectable()
@@ -22,7 +23,7 @@ export class TagService {
     return await this.queryBus.execute(new GetTagByIdQuery(id));
   }
 
-  async GetByKey(key: string): Promise<TagDtoInfo> {
+  async GetByKey(key: string): Promise<TagDtoInfo[]> {
     return await this.queryBus.execute(new GetTagByKeyQuery(key));
   }
 

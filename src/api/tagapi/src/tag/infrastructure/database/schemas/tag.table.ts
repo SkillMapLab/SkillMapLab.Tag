@@ -1,10 +1,10 @@
 import { AutoMap } from '@automapper/classes';
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Tag {
   @AutoMap()
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryColumn()
   id: string;
   @AutoMap()
   @Column()

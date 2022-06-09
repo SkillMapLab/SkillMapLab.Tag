@@ -9,6 +9,6 @@ export class CreatedTagEventHandler implements IEventHandler<CreatedTagEvent> {
 
   async handle(event: CreatedTagEvent) {
     //Create an integration event
-
+    console.log("Event fired")
   }
 }
