@@ -8,7 +8,7 @@ import { CreatedTagEvent } from 'src/tag/application/events';
 @Injectable()
 export class TagsSagas {
   @Saga()
-  dragonKilled = (events$: Observable<any>): Observable<ICommand> => {
+  tagCreated = (events$: Observable<any>): Observable<ICommand> => {
     return events$
       .pipe(
         ofType(CreatedTagEvent),

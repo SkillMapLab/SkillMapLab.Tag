@@ -2,8 +2,8 @@ import { AutomapperProfile, InjectMapper } from '@automapper/nestjs';
 import { createMap, forMember, mapFrom, Mapper, MappingConfiguration, MappingProfile, typeConverter } from '@automapper/core';
 import { Injectable } from '@nestjs/common';
 import { Tag } from 'src/tag/infrastructure/database/schemas';
-import { CreateTagDto, TagDtoInfo } from 'src/tag/application';
-import { CreateTagCommand } from 'src/tag/application/commands';
+import { CreateTagDto, TagDtoInfo, UpdateTagDto } from 'src/tag/application';
+import { CreateTagCommand, UpdateTagCommand } from 'src/tag/application/commands';
 import { TagDomain } from 'src/tag/domain';
 
 @Injectable()
@@ -26,6 +26,11 @@ export class TagsProfile extends AutomapperProfile {
         forMember((d) => d.description, mapFrom((s) => s.description)),
       );
       createMap(mapper, CreateTagDto, CreateTagCommand,
+        forMember((d) => d.key, mapFrom((s) => s.key)),
+        forMember((d) => d.name, mapFrom((s) => s.name)),
+        forMember((d) => d.description, mapFrom((s) => s.description)),
+      );
+      createMap(mapper, UpdateTagDto, UpdateTagCommand,
         forMember((d) => d.key, mapFrom((s) => s.key)),
         forMember((d) => d.name, mapFrom((s) => s.name)),
         forMember((d) => d.description, mapFrom((s) => s.description)),
