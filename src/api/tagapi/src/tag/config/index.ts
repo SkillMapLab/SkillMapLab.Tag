@@ -1,1 +1,0 @@
-export { TagsProfile } from './mapping'

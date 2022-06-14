@@ -34,6 +34,7 @@ export class TagsController {
     await this.tagService.Create(tag);
   }
 
+
   @Post('multiple')
   async CreateMultiple(@Body() tags: CreateTagDto[]): Promise<void> {
     await this.tagService.CreateMultiple(tags);

@@ -1,10 +1,9 @@
 import { Mapper } from '@automapper/core';
 import { InjectMapper } from '@automapper/nestjs';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { InjectRepository } from '@nestjs/typeorm';
 
 import { TagDomain } from 'src/tag/domain';
-import { Tag, TagRepository } from 'src/tag/infrastructure/database';
+import { TagRepository } from 'src/tag/infrastructure/database';
 import { TagDtoInfo } from '../../dto';
 import { GetTagsQuery } from '../get-tags.query';
 

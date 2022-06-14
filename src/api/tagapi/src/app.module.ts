@@ -3,10 +3,14 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
+import { SharedModule } from './shared/shared.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    SharedModule,
     TagModule,
+    ConfigModule.forRoot(),
     AutomapperModule.forRoot([
       {
         name: 'classes',
@@ -15,7 +19,7 @@ import { classes } from '@automapper/classes';
     ]
     ),
     TypeOrmModule.forRootAsync({
-      useFactory: () => ({
+      useFactory: async () => ({
         type: 'mysql',
         host: process.env.DATABASE_HOST,
         port: parseInt(process.env.DATABASE_PORT) || 5432,
@@ -27,7 +31,7 @@ import { classes } from '@automapper/classes';
         retryAttempts: parseInt(process.env.DATABASE_RETRY),
         retryDelay: parseInt(process.env.DATABASE_RETRYDELAY),
       }),
-    })
+    }),
   ],
 })
 export class AppModule { }

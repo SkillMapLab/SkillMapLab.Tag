@@ -6,12 +6,10 @@ import { Injectable } from '@nestjs/common';
 import { CreateTagDto, TagDtoInfo, UpdateTagDto } from '../dto';
 import { GetTagByIdQuery, GetTagByKeyQuery, GetTagsQuery } from '../queries';
 import { CreateTagCommand, DeleteTagCommand, UpdateTagCommand } from '../commands';
-import { TagDomain } from 'src/tag/domain';
-
-
 @Injectable()
 export class TagService {
-  constructor(@InjectMapper('classes') private mapper: Mapper,
+  constructor(
+    @InjectMapper('classes') private mapper: Mapper,
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus) { }
 

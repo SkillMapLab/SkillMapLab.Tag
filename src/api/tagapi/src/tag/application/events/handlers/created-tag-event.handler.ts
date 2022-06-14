@@ -5,7 +5,9 @@ import { TagRepository } from "src/tag/infrastructure/database";
 
 @EventsHandler(CreatedTagEvent)
 export class CreatedTagEventHandler implements IEventHandler<CreatedTagEvent> {
-  constructor(private repository: TagRepository, private eventBus: EventBus) { }
+  constructor(
+    private repository: TagRepository,
+    private eventBus: EventBus) { }
 
   async handle(event: CreatedTagEvent) {
     //Create an integration event

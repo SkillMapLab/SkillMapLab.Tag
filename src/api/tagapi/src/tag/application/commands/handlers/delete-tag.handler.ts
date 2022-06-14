@@ -1,11 +1,8 @@
 import { InjectMapper } from '@automapper/nestjs';
-import { InjectRepository } from '@nestjs/typeorm';
 import { Mapper } from '@automapper/core';
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 
 import { TagRepository } from 'src/tag/infrastructure/database';
-import { Tag } from 'src/tag/infrastructure/database/schemas';
-import { TagDomain } from 'src/tag/domain';
 import { DeleteTagCommand } from '../delete-tag.command';
 
 @CommandHandler(DeleteTagCommand)
