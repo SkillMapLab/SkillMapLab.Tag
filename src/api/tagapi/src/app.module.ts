@@ -5,6 +5,7 @@ import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
 import { SharedModule } from './shared/shared.module';
 import { ConfigModule } from '@nestjs/config';
+import { DaprModule } from './dapr/dapr.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { ConfigModule } from '@nestjs/config';
         retryDelay: parseInt(process.env.DATABASE_RETRYDELAY),
       }),
     }),
+    DaprModule,
   ],
 })
 export class AppModule { }
