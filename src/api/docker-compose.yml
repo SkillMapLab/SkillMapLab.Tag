@@ -1,0 +1,94 @@
+version: "3.5"
+
+services:
+  db:
+    image: mysql:8.0
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      - MYSQL_DATABASE=tags
+      - MYSQL_ROOT_PASSWORD=160316
+    ports:
+      - '3306:3306'
+    volumes:
+      - db:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  dapr-placement:
+    image: "daprio/dapr"
+    command: ["./placement", "-port", "50006"]
+
+  redis-pub: 
+    image: redis
+    depends_on:
+      - dapr-placement
+    restart: always
+    ports:
+      - 5000:5000
+
+  redis-dapr-sidecar:
+    image: "daprio/daprd:edge"
+    command: [
+        "./daprd",
+        "-app-id",
+        "redis-pub",
+        "-app-port",
+        "6379",
+        "-dapr-http-port",
+        "5000",
+        "-components-path",
+        "/components",
+        "-placement-host-address",
+        "dapr-placement:50006"
+      ]
+    volumes: 
+      - "./dapr/components/:/components"
+    depends_on:
+      - redis-pub
+    network_mode: "service:redis-pub" # Attach the redis-dapr-sidecar to the redis-pub network namespace
+
+  tagapi:
+    build:
+      context: ./
+      dockerfile: ./tagapi/Dockerfile
+    depends_on:
+      - db
+      - redis-pub 
+      - dapr-placement 
+    ports:
+      - 3000:3000
+    restart: always
+    environment:
+      NODE_ENV: dev
+      DATABASE_HOST: db
+      DATABASE_PORT: 3306
+      DATABASE_USER: root
+      DATABASE_PASSWORD: 160316
+      DATABASE_NAME: tags
+      DATABASE_RETRY: 3
+      DATABASE_RETRYDELAY: 1
+    links:
+      - db
+  tagapi-dapr-sidecar:
+    image: "daprio/daprd:edge"
+    command: [
+        "./daprd",
+        "-app-id",
+        "tagapi",
+        "-app-port",
+        "3000",  
+        "-components-path",
+        "/components",
+        "-placement-host-address",
+        "dapr-placement:50006", 
+      ]
+    volumes:
+      - "./dapr/components/:/components"
+    depends_on:
+      - tagapi
+    network_mode: "service:tagapi" # Attach the nest-sub-sidecar to the nest-sub network namespace
+volumes:
+  db:
+    driver: local
+

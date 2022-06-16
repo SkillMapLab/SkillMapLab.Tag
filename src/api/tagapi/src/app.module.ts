@@ -3,13 +3,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
-import { SharedModule } from './shared/shared.module';
 import { ConfigModule } from '@nestjs/config';
-import { DaprModule } from './dapr/dapr.module';
 
 @Module({
   imports: [
-    SharedModule,
     TagModule,
     ConfigModule.forRoot(),
     AutomapperModule.forRoot([
@@ -33,7 +30,6 @@ import { DaprModule } from './dapr/dapr.module';
         retryDelay: parseInt(process.env.DATABASE_RETRYDELAY),
       }),
     }),
-    DaprModule,
   ],
 })
 export class AppModule { }

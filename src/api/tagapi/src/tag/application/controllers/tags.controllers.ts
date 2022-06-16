@@ -40,6 +40,13 @@ export class TagsController {
     await this.tagService.CreateMultiple(tags);
   }
 
+  @Post('/redis-pub')
+  async postRedisPub(@Body() reqBody) {
+    console.log(`Redis published ${JSON.stringify(reqBody)} `);
+
+    return `${reqBody} published received by NestJS subscriber`;
+  }
+
   @Put()
   async Update(@Body() tag: UpdateTagDto): Promise<void> {
     return await this.tagService.Update(tag);
