@@ -31,7 +31,7 @@ export class TagService {
     await this.commandBus.execute(command);
   }
 
-  async CreateMultiple(tags: CreateTagDto[]): Promise<void> {
+  async CreateBatch(tags: CreateTagDto[]): Promise<void> {
     const commands = await this.mapper.mapArrayAsync(tags, CreateTagDto, CreateTagCommand);
 
     await this.commandBus.execute(commands);

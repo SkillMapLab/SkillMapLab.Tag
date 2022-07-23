@@ -1,0 +1,76 @@
+version: "3.7"
+
+services:
+  tagapi:
+    image: tag-api:v1
+    container_name: tag-api
+    build:
+      context: ./tags-api
+      dockerfile: Dockerfile
+    env_file: .env
+    ports:
+      - 80:3000
+    depends_on:
+      - mysqldb
+      - rabbitmq
+    restart: always
+    networks:
+      - skillmap-network
+
+  tagagent:
+    image: tag-agent:v1
+    container_name: tag-agent
+    build:
+      context: ./tags-agent
+      dockerfile: Dockerfile
+    env_file: .env
+    depends_on:
+      - mysqldb
+      - rabbitmq
+    restart: always
+    networks:
+      - skillmap-network
+
+  microservice-passengers:
+    image: microservice-passengers:v2
+    container_name: microservice-passengers
+    build:
+      context: ./microservice-passengers
+      dockerfile: Dockerfile
+    env_file: .env.example
+    depends_on:
+      - mongodb
+      - rabbitmq
+    restart: always
+    networks:
+      - skillmap-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    expose:
+      - 5672
+      - 15672
+    restart: always
+    networks:
+      - skillmap-network
+
+  mysqldb:
+    image: mysql:latest
+    container_name: mysqldb
+    restart: always
+    environment:
+      - MYSQL_DATA_DIR=/data/db
+      - MYSQL_LOG_DIR=/dev/null
+    volumes:
+      - mysqldb:/data/db
+    expose:
+      - 3306
+    networks:
+      - skillmap-network
+
+volumes:
+  mysqldb:
+
+networks:
+  skillmap-network:

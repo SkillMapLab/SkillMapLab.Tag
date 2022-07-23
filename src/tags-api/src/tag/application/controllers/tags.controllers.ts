@@ -35,9 +35,9 @@ export class TagsController {
   }
 
 
-  @Post('multiple')
-  async CreateMultiple(@Body() tags: CreateTagDto[]): Promise<void> {
-    await this.tagService.CreateMultiple(tags);
+  @Post('batch')
+  async CreateBatch(@Body() tags: CreateTagDto[]): Promise<void> {
+    await this.tagService.CreateBatch(tags);
   }
 
   @Post('/redis-pub')
