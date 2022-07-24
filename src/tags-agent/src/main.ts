@@ -14,7 +14,7 @@ async function bootstrap() {
         urls: [process.env.RMQ_URL],
         queue: CommonQueues.TagsQueue,
         queueOptions: {
-          durable: false,
+          durable: true,
         },
       },
     },
@@ -24,5 +24,7 @@ async function bootstrap() {
   app.useGlobalFilters(...CommonFilters);
 
   await app.listen();
+
+  console.log('Tags Microservice is listening...');
 }
 bootstrap();
