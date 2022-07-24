@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { TagRepository } from 'src/tag/infrastructure/database';
 import { CreateTagCommand } from '../create-tag.command';
 import { TagDomain } from 'src/tag/domain';
-import { Inject } from '@nestjs/common';
 
 @CommandHandler(CreateTagCommand)
 export class CreateTagCommandHandler implements ICommandHandler<CreateTagCommand> {

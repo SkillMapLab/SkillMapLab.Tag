@@ -6,7 +6,5 @@ export class TagDto {
   key: string;
   @IsString()
   @IsNotEmpty()
-  name: string;
-  @IsString()
-  description: string;
+  name: string;  
 }

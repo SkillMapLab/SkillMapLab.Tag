@@ -6,9 +6,8 @@ import { classes } from '@automapper/classes';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [
-    TagModule,
-    ConfigModule.forRoot(),
+  imports: [    
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: ['.env.development'] }),
     AutomapperModule.forRoot([
       {
         name: 'classes',
@@ -30,6 +29,7 @@ import { ConfigModule } from '@nestjs/config';
         retryDelay: parseInt(process.env.DATABASE_RETRYDELAY),
       }),
     }),
+    TagModule,
   ],
 })
 export class AppModule { }

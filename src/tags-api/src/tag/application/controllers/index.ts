@@ -1,1 +1,0 @@
-export { TagsController } from './tags.controllers';

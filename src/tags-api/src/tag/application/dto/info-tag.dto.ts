@@ -8,7 +8,5 @@ export class TagDtoInfo {
   @AutoMap()
   name: string;
   @AutoMap()
-  description: string;
-  @AutoMap()
   status: string;
 }

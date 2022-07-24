@@ -3,7 +3,9 @@ import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 
-import { CreatedTagEvent } from 'src/tag/application/events';
+import { CreatedTagIntegrationEvent } from 'src/tag/application/events/tag-created.event';
+import { CreatedTagEvent } from 'src/tag/domain/events';
+
 
 @Injectable()
 export class TagsSagas {
@@ -13,10 +15,11 @@ export class TagsSagas {
       .pipe(
         ofType(CreatedTagEvent),
         delay(1000),
-        map(event => {
-          // Logic here
-          return event.id;
-        }),
+        map((event) => {
+            const command = new CreatedTagIntegrationEvent(event.id, event.key, event.name);
+            console.log(command)
+            return command;
+        } )
       );
   }
 }

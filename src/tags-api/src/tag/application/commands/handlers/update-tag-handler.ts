@@ -19,7 +19,7 @@ export class UpdateTagCommandHandler implements ICommandHandler<UpdateTagCommand
 
     const tagMerged = this.publisher.mergeObjectContext(dataDomain);
 
-    tagMerged.Update(command.name, command.description);
+    tagMerged.Update(command.name);
 
     await this.tagRepository.Update(tagMerged.id, tagMerged);
 

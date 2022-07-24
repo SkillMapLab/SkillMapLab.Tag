@@ -3,9 +3,9 @@ import { Mapper } from '@automapper/core';
 import { InjectMapper } from '@automapper/nestjs';
 import { Injectable } from '@nestjs/common';
 
-import { CreateTagDto, TagDtoInfo, UpdateTagDto } from '../dto';
-import { GetTagByIdQuery, GetTagByKeyQuery, GetTagsQuery } from '../queries';
-import { CreateTagCommand, DeleteTagCommand, UpdateTagCommand } from '../commands';
+import { CreateTagDto, TagDtoInfo, UpdateTagDto } from './application/dto';
+import { GetTagByIdQuery, GetTagByKeyQuery, GetTagsQuery } from './application/queries';
+import { CreateTagCommand, DeleteTagCommand, UpdateTagCommand } from './application/commands';
 @Injectable()
 export class TagService {
   constructor(
@@ -37,8 +37,9 @@ export class TagService {
     await this.commandBus.execute(commands);
   }
 
-  async Update(tag: UpdateTagDto): Promise<void> {
+  async Update(id: string, tag: UpdateTagDto): Promise<void> {
     const command = await this.mapper.mapAsync(tag, UpdateTagDto, UpdateTagCommand);
+    command.id = id;
 
     return await this.commandBus.execute(command);
   }

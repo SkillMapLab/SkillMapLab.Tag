@@ -7,8 +7,9 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CreateTagDto, TagDtoInfo, UpdateTagDto } from '../dto';
-import { TagService } from '../services';
+import { CreateTagDto, TagDtoInfo, UpdateTagDto } from './application/dto';
+import { TagService } from './tag.service';
+
 
 @Controller('api/v1/tags')
 export class TagsController {
@@ -31,7 +32,7 @@ export class TagsController {
 
   @Post()
   async Create(@Body() tag: CreateTagDto): Promise<void> {
-    await this.tagService.Create(tag);
+     await this.tagService.Create(tag);
   }
 
 
@@ -40,16 +41,9 @@ export class TagsController {
     await this.tagService.CreateBatch(tags);
   }
 
-  @Post('/redis-pub')
-  async postRedisPub(@Body() reqBody) {
-    console.log(`Redis published ${JSON.stringify(reqBody)} `);
-
-    return `${reqBody} published received by NestJS subscriber`;
-  }
-
-  @Put()
-  async Update(@Body() tag: UpdateTagDto): Promise<void> {
-    return await this.tagService.Update(tag);
+  @Put(':id')
+  async Update(@Param('id') id: string, @Body() tag: UpdateTagDto): Promise<void> {
+    return await this.tagService.Update(id, tag);
   }
 
   @Delete(':id')

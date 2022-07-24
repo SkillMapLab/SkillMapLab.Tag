@@ -13,9 +13,6 @@ export class Tag {
   @Column()
   name: string;
   @AutoMap()
-  @Column()
-  description: string;
-  @AutoMap()
   @Column({ default: 1 })
   status: number;
 }
