@@ -16,43 +16,48 @@ export class TagsController {
   constructor(private tagService: TagService) { }
 
   @Get()
-  async GetAll(): Promise<TagDtoInfo[]> {
-    return await this.tagService.GetAll(1);
+  async getAll(): Promise<TagDtoInfo[]> {
+    return await this.tagService.getAll(1);
   }
 
   @Get(':id')
-  async GetById(@Param('id') id: string): Promise<TagDtoInfo> {
-    return await this.tagService.GetById(id);
+  async getById(@Param('id') id: string): Promise<TagDtoInfo> {
+    return await this.tagService.getById(id);
   }
 
   @Get('getbykey/:key')
-  async GetByKey(@Param('key') key: string): Promise<TagDtoInfo[]> {
-    return await this.tagService.GetByKey(key);
+  async getByKey(@Param('key') key: string): Promise<TagDtoInfo[]> {
+    return await this.tagService.getByKey(key);
   }
 
   @Post()
-  async Create(@Body() tag: CreateTagDto): Promise<void> {
-     await this.tagService.Create(tag);
+  async create(@Body() tag: CreateTagDto): Promise<void> {
+     await this.tagService.create(tag);
   }
 
 
   @Post('batch')
-  async CreateBatch(@Body() tags: CreateTagDto[]): Promise<void> {
-    await this.tagService.CreateBatch(tags);
+  async createBatch(@Body() tags: CreateTagDto[]): Promise<void> {
+    await this.tagService.createBatch(tags);
   }
 
   @Put(':id')
-  async ChangeTagName(@Param('id') id: string, @Body() tag: UpdateTagDto): Promise<void> {
-    return await this.tagService.ChangeName(id, tag);
+  async changeTagName(@Param('id') id: string, @Body() tag: UpdateTagDto): Promise<void> {
+    return await this.tagService.changeName(id, tag);
   }
 
   @Put(':id')
-  async Enable(@Param('id') id: string): Promise<void> {
-    return await this.tagService.Enable(id);
+  async enable(@Param('id') id: string): Promise<void> {
+    return await this.tagService.enable(id);
   }
 
   @Put(':id')
-  async Disable(@Param('id') id: string): Promise<void> {
-    return await this.tagService.Disable(id);
+  async disable(@Param('id') id: string): Promise<void> {
+    return await this.tagService.disable(id);
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string): Promise<void> {
+    return await this.tagService.delete(id);
   }
 }

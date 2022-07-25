@@ -6,6 +6,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateTagDto, TagDtoInfo, UpdateTagDto } from './application/dto';
 import { GetTagByIdQuery, GetTagByKeyQuery, GetTagsQuery } from './application/queries';
 import { CreateTagCommand, DisableTagCommand, EnableTagCommand, ChangeTagNameCommand } from './application/commands';
+import { DeleteTagCommand } from './application/commands/delete-tag.command';
 
 
 @Injectable()
@@ -15,42 +16,46 @@ export class TagService {
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus) { }
 
-  async GetAll(status: number): Promise<TagDtoInfo[]> {
+  async getAll(status: number): Promise<TagDtoInfo[]> {
     return await this.queryBus.execute(new GetTagsQuery(status));
   }
 
-  async GetById(id: string): Promise<TagDtoInfo> {
+  async getById(id: string): Promise<TagDtoInfo> {
     return await this.queryBus.execute(new GetTagByIdQuery(id));
   }
 
-  async GetByKey(key: string): Promise<TagDtoInfo[]> {
+  async getByKey(key: string): Promise<TagDtoInfo[]> {
     return await this.queryBus.execute(new GetTagByKeyQuery(key));
   }
 
-  async Create(tag: CreateTagDto): Promise<void> {
+  async create(tag: CreateTagDto): Promise<void> {
     const command = await this.mapper.mapAsync(tag, CreateTagDto, CreateTagCommand);
 
     await this.commandBus.execute(command);
   }
 
-  async CreateBatch(tags: CreateTagDto[]): Promise<void> {
+  async createBatch(tags: CreateTagDto[]): Promise<void> {
     const commands = await this.mapper.mapArrayAsync(tags, CreateTagDto, CreateTagCommand);
 
     await this.commandBus.execute(commands);
   }
 
-  async ChangeName(id: string, tag: UpdateTagDto): Promise<void> {
+  async changeName(id: string, tag: UpdateTagDto): Promise<void> {
     const command = await this.mapper.mapAsync(tag, UpdateTagDto, ChangeTagNameCommand);
     command.id = id;
 
     return await this.commandBus.execute(command);
   }
 
-   async Enable(id: string): Promise<void> {
+   async enable(id: string): Promise<void> {
     return await this.commandBus.execute(new EnableTagCommand(id));
   }
 
-  async Disable(id: string): Promise<void> {
+  async disable(id: string): Promise<void> {
     return await this.commandBus.execute(new DisableTagCommand(id));
+  }
+
+   async delete(id: string): Promise<void> {
+    return await this.commandBus.execute(new DeleteTagCommand(id));
   }
 }
