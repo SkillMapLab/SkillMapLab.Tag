@@ -1,5 +1,4 @@
-import { TagDto } from './tag.dto';
-
-export class CreateTagDto extends TagDto {
-  status: number;
+export class CreateTagDto {
+  key: string;
+  name: string;
 }

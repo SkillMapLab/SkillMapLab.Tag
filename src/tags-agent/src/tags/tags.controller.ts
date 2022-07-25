@@ -2,7 +2,7 @@ import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 
 import { MessageTagPatterns } from 'src/common/constants';
-import { CreateTagDto, UpdateTagDto } from './dtos';
+import { CreateTagDto } from './dtos';
 import { TagsService } from './tags.service';
 
 @Controller()
@@ -19,9 +19,14 @@ export class TagsController {
     return this.tagService.createBatch(createTagDtos);
   }
 
-  @MessagePattern(MessageTagPatterns.UPDATE)
-  update(@Payload() updateTagDto: UpdateTagDto) {
-    return this.tagService.update(updateTagDto);
+  @MessagePattern(MessageTagPatterns.ENABLE)
+  enable(@Payload() id: string) {
+    return this.tagService.enable(id);
+  }
+
+  @MessagePattern(MessageTagPatterns.DISABLE)
+  disable(@Payload() id: string) {
+    return this.tagService.disable(id);
   }
 
   @MessagePattern(MessageTagPatterns.DELETE)

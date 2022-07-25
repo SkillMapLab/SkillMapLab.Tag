@@ -21,6 +21,7 @@ async function bootstrap() {
   );
 
   app.useGlobalInterceptors(...CommonInterceptors);
+
   app.useGlobalFilters(...CommonFilters);
 
   await app.listen();

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 
-import { CreateTagDto, UpdateTagDto } from './dtos';
+import { CreateTagDto } from './dtos';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
@@ -21,11 +21,12 @@ export class TagsService {
     return this.httpService.post(`${this.Url}/tags/batch`, createTagDtos);
   }
 
-  update(updateTagDto: UpdateTagDto) {
-    return this.httpService.put(
-      `${this.Url}/tags/${updateTagDto.id}`,
-      updateTagDto,
-    );
+  enable(id: string) {
+    return this.httpService.put(`${this.Url}/tags/enable/${id}`);
+  }
+
+  disable(id: string) {
+    return this.httpService.put(`${this.Url}/tags/disable/${id}`);
   }
 
   delete(id: string) {
