@@ -26,11 +26,13 @@ export class TagsController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() tagDto: TagDto): Observable<ITag> {
-    return this.clientProxyTag.send(MessageTagPatterns.UPDATE, {
-      id,
-      tagDto,
-    });
+  enable(@Param('id') id: string): Observable<ITag> {
+    return this.clientProxyTag.send(MessageTagPatterns.ENABLE, id);
+  }
+
+  @Put(':id')
+  disable(@Param('id') id: string): Observable<ITag> {
+    return this.clientProxyTag.send(MessageTagPatterns.DISABLE, id);
   }
 
   @Delete(':id')
