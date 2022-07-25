@@ -10,8 +10,8 @@ import { TagModule } from './tag/tag.module';
 @Module({
   imports: [    
     ThrottlerModule.forRoot({
-      ttl: 60,
-      limit: 10,
+      ttl: parseInt(process.env.SECURITY_THROTTLER_TTL) || 60,
+      limit: parseInt(process.env.SECURITY_THROTTLER_LIMIT) || 10,
     }),
     ConfigModule.forRoot({ isGlobal: true, envFilePath: ['.env.development'] }),
     AutomapperModule.forRoot([
@@ -29,8 +29,7 @@ import { TagModule } from './tag/tag.module';
         username: process.env.DATABASE_USER,
         password: process.env.DATABASE_PASSWORD,
         database: process.env.DATABASE_NAME,
-        autoLoadEntities: true,
-        synchronize: true, // disabled in production
+        autoLoadEntities: Boolean(process.env.DATABASE_AUTOLOAD),
         retryAttempts: parseInt(process.env.DATABASE_RETRY),
         retryDelay: parseInt(process.env.DATABASE_RETRYDELAY),
       }),
