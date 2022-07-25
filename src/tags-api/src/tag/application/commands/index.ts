@@ -1,3 +1,4 @@
 export { CreateTagCommand } from './create-tag.command';
-export { UpdateTagCommand } from './update-tag.command';
-export { DeleteTagCommand } from './delete-tag.command';
+export { ChangeTagNameCommand } from './update-tagname.command';
+export { EnableTagCommand } from './enable-tag.command';
+export { DisableTagCommand } from './disable-tag.command';

@@ -8,7 +8,7 @@ export class Uuid {
   }
 
   static generate(): string {
-    return uuidv4();
+    return uuidv4().toString();
   }
 
   toString(): string {

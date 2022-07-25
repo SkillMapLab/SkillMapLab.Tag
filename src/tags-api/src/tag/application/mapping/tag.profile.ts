@@ -3,10 +3,14 @@ import { createMap, forMember, mapFrom, Mapper, MappingProfile } from '@automapp
 import { Injectable } from '@nestjs/common';
 
 
-import { CreateTagCommand, UpdateTagCommand } from 'src/tag/application/commands';
+import { CreateTagCommand, ChangeTagNameCommand } from 'src/tag/application/commands';
 import { TagDomain } from 'src/tag/domain';
 import { TagModel } from 'src/tag/infrastructure/database/models';
 import { CreateTagDto, TagDtoInfo, UpdateTagDto } from '../dto';
+import { Id } from 'src/tag/domain/id.domain';
+import { Key } from 'src/tag/domain/key.domain';
+import { Name } from 'src/tag/domain/name.domain';
+import { TagStatus } from 'src/tag/domain/tag.domain';
 
 @Injectable()
 export class TagsProfile extends AutomapperProfile {
@@ -26,9 +30,9 @@ export class TagsProfile extends AutomapperProfile {
         )
       );
        createMap(mapper, TagDomain, TagDtoInfo,
-        forMember((d) => d.id, mapFrom((s) => s.id)),
-        forMember((d) => d.key, mapFrom((s) => s.key)),
-        forMember((d) => d.name, mapFrom((s) => s.name)),
+        forMember((d) => new Id(d.id), mapFrom((s) => s.id)),
+        forMember((d) => new Key(d.key), mapFrom((s) => s.key)),
+        forMember((d) => new Name(d.name), mapFrom((s) => s.name)),
         forMember(
           (d) => d.status,
           mapFrom((s) => GetStatusName(s.status))
@@ -42,33 +46,33 @@ export class TagsProfile extends AutomapperProfile {
         forMember((d) => d.key, mapFrom((s) => s.key)),
         forMember((d) => d.name, mapFrom((s) => s.name)),
               );
-      createMap(mapper, UpdateTagDto, UpdateTagCommand,
+      createMap(mapper, UpdateTagDto, ChangeTagNameCommand,
         forMember((d) => d.key, mapFrom((s) => s.key)),
         forMember((d) => d.name, mapFrom((s) => s.name)),
         
       );
       createMap(mapper, TagDomain, TagModel,
-        forMember((d) => d.id, mapFrom((s) => s.id)),
-        forMember((d) => d.key, mapFrom((s) => s.key)),
-        forMember((d) => d.name, mapFrom((s) => s.name)),        
+        forMember((d) => new Id(d.id), mapFrom((s) => s.id)),
+        forMember((d) => new Key(d.key), mapFrom((s) => s.key)),
+        forMember((d) => new Name(d.name), mapFrom((s) => s.name)),        
       )
         createMap(mapper, TagModel, TagDomain,
-        forMember((d) => d.id, mapFrom((s) => s.id)),
-        forMember((d) => d.key, mapFrom((s) => s.key)),
-        forMember((d) => d.name, mapFrom((s) => s.name)),        
+        forMember((d) => d.id, mapFrom((s) => new Id(s.id))),
+        forMember((d) => d.key, mapFrom((s) => new Key(s.key))),
+        forMember((d) => d.name, mapFrom((s) => new Name(s.name))),        
       )
     };
   }
 }
 
 
-const GetStatusName = (value: number): string => {
+const GetStatusName = (value: TagStatus): string => {
   switch (value) {
-    case 1:
-      return "Active"
+    case TagStatus.Inactive:
+      return "Inactive"
       break;
     default:
-      return "Inactive"
+      return "Active"
       break;
   }
 }

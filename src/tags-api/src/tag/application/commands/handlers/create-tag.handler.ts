@@ -1,11 +1,13 @@
 import { Mapper } from '@automapper/core';
 import { InjectMapper } from '@automapper/nestjs';
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
-import { v4 as uuidv4 } from 'uuid';
 
 import { TagRepository } from 'src/tag/infrastructure/database';
 import { CreateTagCommand } from '../create-tag.command';
 import { TagDomain } from 'src/tag/domain';
+import { Id } from 'src/tag/domain/id.domain';
+import { Key } from 'src/tag/domain/key.domain';
+import { Name } from 'src/tag/domain/name.domain';
 
 @CommandHandler(CreateTagCommand)
 export class CreateTagCommandHandler implements ICommandHandler<CreateTagCommand> {
@@ -16,9 +18,9 @@ export class CreateTagCommandHandler implements ICommandHandler<CreateTagCommand
   ) { }
 
   async execute(command: CreateTagCommand): Promise<void> {
-    const id = uuidv4();
+    const id = Id.generate();
 
-    const tagDomain = TagDomain.Create(id, command.key, command.name, command.description);
+    const tagDomain = TagDomain.Create(new Id(id), new Key(command.key), new Name(command.name));
 
     const tagMerged = this.publisher.mergeObjectContext(tagDomain);
 

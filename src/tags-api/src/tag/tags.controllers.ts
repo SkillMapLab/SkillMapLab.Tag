@@ -42,12 +42,17 @@ export class TagsController {
   }
 
   @Put(':id')
-  async Update(@Param('id') id: string, @Body() tag: UpdateTagDto): Promise<void> {
-    return await this.tagService.Update(id, tag);
+  async ChangeTagName(@Param('id') id: string, @Body() tag: UpdateTagDto): Promise<void> {
+    return await this.tagService.ChangeName(id, tag);
   }
 
-  @Delete(':id')
-  async delete(@Param('id') id: string): Promise<void> {
-    return await this.tagService.Delete(id);
+  @Put(':id')
+  async Enable(@Param('id') id: string): Promise<void> {
+    return await this.tagService.Enable(id);
+  }
+
+  @Put(':id')
+  async Disable(@Param('id') id: string): Promise<void> {
+    return await this.tagService.Disable(id);
   }
 }

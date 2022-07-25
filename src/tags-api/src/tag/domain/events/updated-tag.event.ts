@@ -1,3 +1,3 @@
-export class UpdatedTagEvent {
-  constructor(public name: string) { }
-}
+import { TagEvent } from "./tag.event";
+
+export class UpdatedTagEvent extends TagEvent {}

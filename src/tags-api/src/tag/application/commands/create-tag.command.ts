@@ -1,3 +1,3 @@
 export class CreateTagCommand {
-  constructor(public key: string, public name: string, public description: string = '') { }
+  constructor(public key: string, public name: string) { }
 }

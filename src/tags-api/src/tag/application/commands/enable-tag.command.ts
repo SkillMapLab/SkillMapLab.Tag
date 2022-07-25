@@ -1,3 +1,3 @@
-export class DeleteTagCommand {
+export class EnableTagCommand {
   constructor(public id: string) { }
 }
