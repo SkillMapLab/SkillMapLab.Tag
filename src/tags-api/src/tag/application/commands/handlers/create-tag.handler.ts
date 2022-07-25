@@ -24,7 +24,7 @@ export class CreateTagCommandHandler implements ICommandHandler<CreateTagCommand
 
     const tagMerged = this.publisher.mergeObjectContext(tagDomain);
 
-    await this.tagRepository.Insert(tagMerged);
+    await this.tagRepository.insert(tagMerged);
 
     tagMerged.commit();
   }

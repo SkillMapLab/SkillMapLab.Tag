@@ -1,11 +1,12 @@
+import { IRepository } from "src/shared/domain";
 import { TagDomain } from ".";
 
-export interface ITagRepository {
-  GetAll(status: number): Promise<TagDomain[]>;
-  GetById(id: string): Promise<TagDomain>;
-  GetByKey(key: string): Promise<TagDomain[]>;
-  Insert(tag: TagDomain): Promise<void>;
-  InsertMultiple(tags: TagDomain[]): Promise<void>;
-  Update(id: string, tag: TagDomain): Promise<void>;
-  Delete(id: string): Promise<void>;
+export interface ITagRepository extends IRepository<TagDomain> {
+  getAll(): Promise<TagDomain[]>;
+  getById(id: string): Promise<TagDomain>;
+  getByKey(key: string): Promise<TagDomain[]>;
+  insert(tag: TagDomain): Promise<void>;
+  insertBatch(tags: TagDomain[]): Promise<void>;
+  update(id: string, tag: TagDomain): Promise<void>;
+  delete(id: string): Promise<void>;
 } 

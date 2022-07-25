@@ -1,3 +1,3 @@
-export class DisableTagCommand {
-  constructor(public id: string) { }
-}
+import { TagIdCommand } from "./tag-id.command";
+
+export class DisableTagCommand  extends TagIdCommand {}

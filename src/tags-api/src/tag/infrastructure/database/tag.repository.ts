@@ -6,7 +6,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 
 import { ITagRepository, TagDomain } from "src/tag/domain";
 import { TagModel } from "src/tag/infrastructure/database/models";
-import { DatabaseException } from "src/tag/infrastructure/database/exceptions";
+import { DatabaseException } from "./database.exception";
 
 
 @Injectable()
@@ -16,21 +16,17 @@ export class TagRepository implements ITagRepository {
     private repository: Repository<TagModel>,
     @InjectMapper('classes') private mapper: Mapper) { }
 
-  async GetAll(status: number): Promise<TagDomain[]> {
+  async getAll(): Promise<TagDomain[]> {
     try {
-      const dataModel = await this.repository.find({
-        where: {
-          status
-        },
-      })
+      const dataModel = await this.repository.find();           
 
       return await this.mapper.mapArrayAsync(dataModel, TagModel, TagDomain);
-    } catch (error) {
+    } catch (error) {      
       throw new DatabaseException(error.message);
     }
   }
 
-  async GetById(id: string): Promise<TagDomain> {
+  async getById(id: string): Promise<TagDomain> {
     try {
       const dataModel = await this.repository.findOneBy({ id });
 
@@ -40,7 +36,7 @@ export class TagRepository implements ITagRepository {
     }
   }
 
-  async GetByKey(key: string): Promise<TagDomain[]> {
+  async getByKey(key: string): Promise<TagDomain[]> {
     try {
       const dataModel = await this.repository.findBy({ key });
 
@@ -50,7 +46,7 @@ export class TagRepository implements ITagRepository {
     }
   }
 
-  async Insert(model: TagDomain): Promise<void> {
+  async insert(model: TagDomain): Promise<void> {
     try {
       const data = await this.mapper.mapAsync(model, TagDomain, TagModel);
 
@@ -60,7 +56,7 @@ export class TagRepository implements ITagRepository {
     }
   }
 
-  async InsertMultiple(models: TagDomain[]): Promise<void> {
+  async insertBatch(models: TagDomain[]): Promise<void> {
     try {
       const data = await this.mapper.mapArrayAsync(models, TagDomain, TagModel);
 
@@ -70,8 +66,8 @@ export class TagRepository implements ITagRepository {
     }
   }
 
-  async Update(id: string, model: TagDomain): Promise<void> {
-    const dataFound = await this.GetById(id);
+  async update(id: string, model: TagDomain): Promise<void> {
+    const dataFound = await this.getById(id);
 
     if (!dataFound) throw new Error("Tag does not exists.");
 
@@ -84,8 +80,8 @@ export class TagRepository implements ITagRepository {
     }
   }
 
-  async Delete(id: string): Promise<void> {
-    const dataFound = await this.GetById(id);
+  async delete(id: string): Promise<void> {
+    const dataFound = await this.getById(id);
 
     if (!dataFound) throw new Error("Tag does not exists.");
 

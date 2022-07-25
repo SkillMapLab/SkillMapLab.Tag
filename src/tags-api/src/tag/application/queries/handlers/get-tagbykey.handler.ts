@@ -16,7 +16,7 @@ export class GetTagByKeyQueryHandler implements IQueryHandler<GetTagByKeyQuery> 
 
   async execute(query: GetTagByKeyQuery): Promise<TagDtoInfo[]> {
 
-    const dataDomain = await this.tagRepository.GetByKey(query.key);
+    const dataDomain = await this.tagRepository.getByKey(query.key);
 
     return await this.mapper.mapArrayAsync(dataDomain, TagDomain, TagDtoInfo);
   }

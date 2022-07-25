@@ -15,13 +15,13 @@ export class EnableTagCommandHandler implements ICommandHandler<EnableTagCommand
   ) { }
 
   async execute(command: EnableTagCommand): Promise<void> {
-    const tagDomain = await this.tagRepository.GetById(command.id);   
+    const tagDomain = await this.tagRepository.getById(command.id);   
 
     tagDomain.Enable();
 
     const tagMerged = this.publisher.mergeObjectContext(tagDomain);
 
-    await this.tagRepository.Delete(tagDomain.id.value);
+    await this.tagRepository.update(tagDomain.id.value, tagDomain);
 
     tagMerged.commit();
   }

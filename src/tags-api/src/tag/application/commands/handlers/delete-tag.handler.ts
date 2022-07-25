@@ -3,10 +3,10 @@ import { Mapper } from '@automapper/core';
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 
 import { TagRepository } from 'src/tag/infrastructure/database';
-import { DisableTagCommand } from '../disable-tag.command';
+import { DeleteTagCommand } from '../delete-tag.command';
 
-@CommandHandler(DisableTagCommand)
-export class DisableTagCommandHandler implements ICommandHandler<DisableTagCommand>
+@CommandHandler(DeleteTagCommand)
+export class DeleteTagCommandHandler implements ICommandHandler<DeleteTagCommand>
 {
   constructor(
     private tagRepository: TagRepository,
@@ -14,14 +14,14 @@ export class DisableTagCommandHandler implements ICommandHandler<DisableTagComma
     private readonly publisher: EventPublisher
   ) { }
 
-  async execute(command: DisableTagCommand): Promise<void> {
+  async execute(command: DeleteTagCommand): Promise<void> {
     const tagDomain = await this.tagRepository.getById(command.id);   
 
     tagDomain.Disable();
 
     const tagMerged = this.publisher.mergeObjectContext(tagDomain);
 
-    await this.tagRepository.update(tagDomain.id.value, tagDomain);
+    await this.tagRepository.delete(tagDomain.id.value);
 
     tagMerged.commit();
   }

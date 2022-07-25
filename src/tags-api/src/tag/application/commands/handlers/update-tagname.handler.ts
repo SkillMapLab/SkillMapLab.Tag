@@ -16,13 +16,13 @@ export class UpdateTagCommandHandler implements ICommandHandler<ChangeTagNameCom
   ) { }
 
   async execute(command: ChangeTagNameCommand): Promise<void> {
-    const tagDomain = await this.tagRepository.GetById(command.id);
+    const tagDomain = await this.tagRepository.getById(command.id);
 
     tagDomain.ChangeName(new Name(command.name));
 
     const tagMerged = this.publisher.mergeObjectContext(tagDomain);
 
-    await this.tagRepository.Update(tagDomain.id.value, tagDomain);
+    await this.tagRepository.update(tagDomain.id.value, tagDomain);
 
     tagMerged.commit();
   }

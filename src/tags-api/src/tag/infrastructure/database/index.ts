@@ -1,1 +1,1 @@
-export { TagRepository } from './repositories/tag.repository' 
+export { TagRepository } from './tag.repository' 
