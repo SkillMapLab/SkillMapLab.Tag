@@ -3,7 +3,7 @@ import { StringValueObject } from "src/shared/domain/value-object/string.valueob
 export class Key extends StringValueObject{
 
   guard(): boolean {    
-    if (this.value.length <= 0) return true;
-    if (this.value.length > 10) return true;
+    if (this.value && this.value.toString().length <= 0) return true;
+    if (this.value && (this.value.toString().length > 10)) return true;
   }
 }

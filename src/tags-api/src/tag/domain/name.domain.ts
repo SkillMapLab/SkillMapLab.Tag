@@ -2,6 +2,6 @@ import { StringValueObject } from "src/shared/domain/value-object/string.valueob
 
 export class Name extends StringValueObject {
   guard(): boolean {
-    if (this.value.length <= 0) return true;   
+    if (this.value && this.value.toString().length <= 0) return true;   
   }
 }
