@@ -1,12 +1,18 @@
-import { TagModule } from './tag/tag.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
 import { ConfigModule } from '@nestjs/config';
+import { ThrottlerModule } from '@nestjs/throttler';
+
+import { TagModule } from './tag/tag.module';
 
 @Module({
   imports: [    
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 10,
+    }),
     ConfigModule.forRoot({ isGlobal: true, envFilePath: ['.env.development'] }),
     AutomapperModule.forRoot([
       {
