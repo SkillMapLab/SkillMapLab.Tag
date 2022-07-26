@@ -5,14 +5,17 @@ import { CommonQueues } from './common/constants';
 import { CommonInterceptors } from './common/interceptors';
 import { CommonFilters } from './common/filters';
 
+const serverRMQ = process.env.RMQ_URL;
+const queue = CommonQueues.TagsQueue;
+
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AppModule,
     {
       transport: Transport.RMQ,
       options: {
-        urls: [process.env.RMQ_URL],
-        queue: CommonQueues.TagsQueue,
+        urls: [serverRMQ],
+        queue: queue,
         queueOptions: {
           durable: true,
         },
@@ -26,6 +29,8 @@ async function bootstrap() {
 
   await app.listen();
 
-  console.log('Tags Microservice is listening...');
+  console.log(
+    `Tags Agent Microservice is listening => Server: ${serverRMQ}, queue: ${queue}`,
+  );
 }
 bootstrap();

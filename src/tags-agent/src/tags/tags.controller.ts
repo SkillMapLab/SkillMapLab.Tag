@@ -14,11 +14,6 @@ export class TagsController {
     return this.tagService.create(createTagDto);
   }
 
-  @MessagePattern(MessageTagPatterns.CREATE_BATCH)
-  createBatch(@Payload() createTagDtos: CreateTagDto[]) {
-    return this.tagService.createBatch(createTagDtos);
-  }
-
   @MessagePattern(MessageTagPatterns.ENABLE)
   enable(@Payload() id: string) {
     return this.tagService.enable(id);
