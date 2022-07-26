@@ -1,0 +1,35 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+directive @upper on FIELD_DEFINITION
+
+"""tag"""
+type Tag {
+  id: ID!
+  key: String!
+  name: String!
+  status: Float!
+}
+
+type Query {
+  tags(skip: Int = 0, take: Int = 25): [Tag!]!
+  tagById(id: String!): Tag!
+  tagByKey(key: String!): [Tag!]!
+}
+
+type Mutation {
+  add(newTagData: TagInput!): Tag!
+  update(id: String!, updateTagData: TagInput!): Tag!
+  delete(id: String!): Boolean!
+}
+
+input TagInput {
+  key: String!
+  name: String!
+  status: Float = 1
+}
+
+type Subscription {
+  tagAdded: Tag!
+}
